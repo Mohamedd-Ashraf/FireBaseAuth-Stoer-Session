@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "58689442801",
+    "project_id": "auth-session-e4d0c",
+    "storage_bucket": "auth-session-e4d0c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58689442801:android:7bd3370f50f3b072eaea50",
+        "android_client_info": {
+          "package_name": "com.example.fireauth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIzC-4lJpSzhlXmwHtp6_bhIrkYad9cAo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
