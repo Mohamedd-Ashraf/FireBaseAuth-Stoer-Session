@@ -5,8 +5,8 @@ import 'package:fireauth/screens/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'dataprovider/remote/firebase_store_helper.dart';
 import 'screens/LogIn.dart';
 
 int currentVersion = 1;
@@ -33,12 +33,12 @@ class MyApp extends StatelessWidget {
               ),
             );
           } else {
-            if (snapshot.data['working'] == false) {
+            if (snapshot.data['working'] == true) {
               return const StartMyApp();
             } else {
               return Scaffold(
                 body: Center(
-                  child: Text(snapshot.data['Message']),
+                  child: Text(snapshot.data['message']),
                 ),
               );
             }
@@ -70,43 +70,5 @@ class StartMyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: start(),
     );
-  }
-}
-
-Future fetchDataFromFirestore(String collection, String documentId) async {
-  try {
-    var documentSnapshot = await FirebaseFirestore.instance
-        .collection(collection)
-        .doc(documentId)
-        .get();
-    return documentSnapshot;
-  } catch (e) {
-    // Handle errors appropriately
-    rethrow;
-  }
-}
-
-Future updateDataToFirestore(
-    String collection, String documentId, Map<String, dynamic> data) async {
-  try {
-    await FirebaseFirestore.instance
-        .collection(collection)
-        .doc(documentId)
-        .update(data);
-  } catch (e) {
-    // Handle errors appropriately
-    rethrow;
-  }
-}
-
-Future deleteDataFromFirestore(String collection, String documentId) async {
-  try {
-    await FirebaseFirestore.instance
-        .collection(collection)
-        .doc(documentId)
-        .delete();
-  } catch (e) {
-    // Handle errors appropriately
-    rethrow;
   }
 }

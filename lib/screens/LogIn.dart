@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../components/CustomButton.dart';
 import '../components/CustomTextFormField.dart';
-import '../dataprovider/remote/firebasehelper.dart';
+import '../dataprovider/remote/firebase_auth_helper.dart';
 import 'home.dart';
 import 'signUp.dart';
-
 
 class LogIn extends StatefulWidget {
   const LogIn({Key? key}) : super(key: key);
@@ -28,8 +27,6 @@ class _LogInState extends State<LogIn> {
           padding: const EdgeInsets.only(top: 30.0),
           child: Column(
             children: [
-
-
               Form(
                 key: formKey,
                 child: Padding(
@@ -92,7 +89,29 @@ class _LogInState extends State<LogIn> {
 
   //ToDosignInAction
 
-  void signInAction() async{  }
-
-  
+  void signInAction() async {
+    if (formKey.currentState!.validate()) {
+      // showDialog(
+      //     context: context,
+      //     builder: (context) => Center(child: CircularProgressIndicator()));
+    }
+    await FireBaseHelper()
+        .SignIn(
+            emailController.text.toString(), passwordController.text.toString())
+        .then((value) => {
+              if (value is User)
+                {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) => Home())),
+                }
+              else
+                {
+                  // Navigator.of(context).pop(),
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(value.toString()),
+                    backgroundColor: Colors.red,
+                  ))
+                }
+            });
+  }
 }

@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../dataprovider/remote/firebasehelper.dart';
+import '../dataprovider/remote/firebase_auth_helper.dart';
 import 'LogIn.dart';
 
 class Home extends StatelessWidget {
@@ -20,7 +20,7 @@ class Home extends StatelessWidget {
                 //To DO SignOut
                 Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) => LogIn()));
-                await FireBaseHelper().signOut();
+                await FireBaseHelper().SignOut();
               },
               icon: Icon(Icons.logout))
         ],

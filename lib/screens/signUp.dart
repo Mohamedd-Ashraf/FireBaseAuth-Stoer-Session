@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../components/CustomButton.dart';
 import '../components/CustomTextFormField.dart';
-import '../dataprovider/remote/firebasehelper.dart';
+import '../dataprovider/remote/firebase_auth_helper.dart';
 import 'home.dart';
 
 class SignUp extends StatefulWidget {
@@ -72,24 +72,25 @@ class _SignUpState extends State<SignUp> {
   }
 
   void signUpAction() async {
-    if (formKey.currentState!.validate()) {
-      showDialog(
-          context: context,
-          builder: (context) => const CircularProgressIndicator());
-    }
-    FireBaseHelper()
+    // if (formKey.currentState!.validate()) {
+    // showDialog(
+    //     context: context,
+    //     builder: (context) {
+    //       return Center(child: const CircularProgressIndicator());
+    //     });
+    // }
+    await FireBaseHelper()
         .SignUp(userNameController.text.toString(),
             passwordController.text.toString(), emailController.text.toString())
         .then((value) => {
               if (value is User)
                 {
-                  Navigator.of(context).pop(),
                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => Home()))
+                      MaterialPageRoute(builder: (context) => Home())),
                 }
               else if (value is String)
                 {
-                  Navigator.of(context).pop(),
+                  // Navigator.of(context).pop(),
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text(value),
                     backgroundColor: Colors.red,
